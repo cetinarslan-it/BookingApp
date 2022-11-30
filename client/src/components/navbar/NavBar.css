@@ -1,7 +1,13 @@
 .navbar-brand {
-    height:50px; 
-    font-weight: bold;
+    height:60px; 
+    font-size:40px;
+    font-weight: bold ;
+    color:darkslategray;
   }
   .navbar {
-    background-color: rgb(63, 63, 63);
+    background-color:rgba(243, 241, 241, 0.4); 
+  }
+
+  span{
+    color:brown;
   }
