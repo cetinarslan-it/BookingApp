@@ -3,6 +3,14 @@ import BookingModal from "../bookingModal/BookingModal";
 import "./search.css";
 
 const Search = () => {
+ 
+
+  const[way, setWay] = useState(true);
+
+  const wayHandler = () => {
+    setWay(!way)
+  }
+
   const [showOutbound, setShowOutbound] = useState(false);
   const showOutboundDetails = () => {
     setShowOutbound(!showOutbound);
@@ -22,7 +30,7 @@ const Search = () => {
               <div className="col-md-2 pe-0 col-sm-12">
                 <div className="btn radio-btn mb-3 ">
                   <label className="radio">
-                    <input type="radio" value="a" name="book" checked />{" "}
+                    <input type="radio" value="roundtrip" name="book" checked={way} onClick={wayHandler}/>
                     Roundtrip
                     <span></span>
                   </label>
@@ -31,7 +39,8 @@ const Search = () => {
               <div className="col-md-2 pe-0 col-sm-12">
                 <div className="btn radio-btn mb-3">
                   <label className="radio">
-                    <input type="radio" value="a" name="book" /> One way
+                    <input type="radio" value="oneway" name="book" checked={!way} onClick={wayHandler}/> 
+                    One way
                     <span></span>
                   </label>
                 </div>
@@ -72,7 +81,9 @@ const Search = () => {
                   <input className="inputbox textmuted" type="date" />
                 </div>
               </div>
-              <div className="col-md-6 col-12 mb-4">
+              <div className="col-md-6 col-12 mb-4"  style={{
+                  display: way ? "block" : "none",
+                }}>
                 <div className="form-control d-flex flex-column">
                   <p className="h-blue">Return Date</p>
                   <input className="inputbox textmuted " type="date" />
