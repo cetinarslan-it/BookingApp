@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./confirmation.css";
+import Swal from "sweetalert2";
 
 function confirmation() {
   return (
@@ -132,20 +133,23 @@ function confirmation() {
                   </p>
                 </div>
               </div>
-              <div>  <p className="total-price">
-                <strong className="pe-2">Total Price :</strong>SEK 22.000
-              </p></div>
-
-            
+              <div>
+                {" "}
+                <p className="total-price">
+                  <strong className="pe-2">Total Price :</strong>SEK 22.000
+                </p>
+              </div>
 
               <div>
-                <button
-                  type="submit"
-                  className=" btn btn-secondary form-control text-center col-md-6 pe-3 mb-1 mt-3 col-sm-6"
-                  onClick={()=>{alert("You have successfully booked your tickets!...")}}
-                >
+                <div className="btn btn-secondary form-control text-center"
+                onClick={()=>{Swal.fire({
+                  icon: 'success',
+                  title: "Your have succesfully booked your ticket(s)...",
+                  showConfirmButton: false,
+                  timer: 1500
+                })}}>
                   Confirm Booking
-                </button>
+                </div>
               </div>
             </div>
           </form>
