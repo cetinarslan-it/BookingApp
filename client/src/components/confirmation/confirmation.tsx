@@ -1,0 +1,158 @@
+import React from "react";
+import "./confirmation.css";
+
+function confirmation() {
+  return (
+    <div>
+      <div className="App">
+        <div className="container rounded shadow-lg">
+          <form>
+            <h2>Booking Info</h2>
+            <hr className="me-2" />
+
+            <div className="row">
+              <div className="col-md-6 pe-3 mb-1 col-sm-12">
+                <h4>Outbound</h4>
+                <hr />
+                <div className="return">
+                  <p>
+                    <strong>Flight:</strong> Stockholm-Oslo
+                  </p>
+                  <p>
+                    <strong>Date:</strong> Monday 28, 17:00, 2022
+                  </p>
+                  <p>
+                    <strong>Number:</strong> 1 Adult, 3 Children
+                  </p>
+                  <p>
+                    <strong>Price:</strong> SEK 5500
+                  </p>
+                </div>
+              </div>
+
+              <div className="col-md-6 pe-3 mb-1 col-sm-12">
+                <h4>Return</h4>
+                <hr />
+                <div className="return">
+                  <p>
+                    <strong>Flight:</strong> Stockholm-Oslo
+                  </p>
+                  <p>
+                    <strong>Date:</strong> Monday 28, 17:00, 2022
+                  </p>
+                  <p>
+                    <strong>Number:</strong> 1 Adult, 3 Children
+                  </p>
+                  <p>
+                    <strong>Price:</strong> SEK 5500
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <h4 className="passanger-list col-md-6 pe-3 mb-1 col-sm-12">
+                Passanger List
+              </h4>
+              <hr />
+
+              <div className="col-md-6 pe-3 mb-1 col-sm-12">
+                <div className="return">
+                  <p>
+                    <strong>Name:</strong> Stockholm-Oslo
+                  </p>
+                  <p>
+                    <strong>Surname:</strong> Monday 28, 17:00, 2022
+                  </p>
+                  <p>
+                    <strong>Gender:</strong> 1 Adult, 3 Children
+                  </p>
+                  <p>
+                    <strong>Mobile:</strong> SEK 5500
+                  </p>
+                  <p>
+                    <strong>Email:</strong> SEK 5500
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-6 pe-3 mb-1 col-sm-12">
+                <div className="return">
+                  <p>
+                    <strong>Name:</strong> Stockholm-Oslo
+                  </p>
+                  <p>
+                    <strong>Surname:</strong> Monday 28, 17:00, 2022
+                  </p>
+                  <p>
+                    <strong>Gender:</strong> 1 Adult, 3 Children
+                  </p>
+                  <p>
+                    <strong>Mobile:</strong> SEK 5500
+                  </p>
+                  <p>
+                    <strong>Email:</strong> SEK 5500
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-6 pe-3 mb-1 col-sm-12">
+                <div className="return">
+                  <p>
+                    <strong>Name:</strong> Stockholm-Oslo
+                  </p>
+                  <p>
+                    <strong>Surname:</strong> Monday 28, 17:00, 2022
+                  </p>
+                  <p>
+                    <strong>Gender:</strong> 1 Adult, 3 Children
+                  </p>
+                  <p>
+                    <strong>Mobile:</strong> SEK 5500
+                  </p>
+                  <p>
+                    <strong>Email:</strong> SEK 5500
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-6 pe-3 mb-1 col-sm-12">
+                <div className="return">
+                  <p>
+                    <strong>Name:</strong> Stockholm-Oslo
+                  </p>
+                  <p>
+                    <strong>Surname:</strong> Monday 28, 17:00, 2022
+                  </p>
+                  <p>
+                    <strong>Gender:</strong> 1 Adult, 3 Children
+                  </p>
+                  <p>
+                    <strong>Mobile:</strong> SEK 5500
+                  </p>
+                  <p>
+                    <strong>Email:</strong> SEK 5500
+                  </p>
+                </div>
+              </div>
+              <div>  <p className="total-price">
+                <strong className="pe-2">Total Price :</strong>SEK 22.000
+              </p></div>
+
+            
+
+              <div>
+                <button
+                  type="submit"
+                  className=" btn btn-secondary form-control text-center col-md-6 pe-3 mb-1 mt-3 col-sm-6"
+                  onClick={()=>{alert("You have successfully booked your tickets!...")}}
+                >
+                  Confirm Booking
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default confirmation;

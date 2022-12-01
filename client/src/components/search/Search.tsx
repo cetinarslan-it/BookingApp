@@ -3,13 +3,11 @@ import BookingModal from "../bookingModal/BookingModal";
 import "./search.css";
 
 const Search = () => {
- 
-
-  const[way, setWay] = useState(true);
+  const [way, setWay] = useState(true);
 
   const wayHandler = () => {
-    setWay(!way)
-  }
+    setWay(!way);
+  };
 
   const [showOutbound, setShowOutbound] = useState(false);
   const showOutboundDetails = () => {
@@ -30,7 +28,13 @@ const Search = () => {
               <div className="col-md-2 pe-0 col-sm-12">
                 <div className="btn radio-btn mb-3 ">
                   <label className="radio">
-                    <input type="radio" value="roundtrip" name="book" checked={way} onClick={wayHandler}/>
+                    <input
+                      type="radio"
+                      value="roundtrip"
+                      name="book"
+                      checked={way}
+                      onClick={wayHandler}
+                    />
                     Roundtrip
                     <span></span>
                   </label>
@@ -39,7 +43,13 @@ const Search = () => {
               <div className="col-md-2 pe-0 col-sm-12">
                 <div className="btn radio-btn mb-3">
                   <label className="radio">
-                    <input type="radio" value="oneway" name="book" checked={!way} onClick={wayHandler}/> 
+                    <input
+                      type="radio"
+                      value="oneway"
+                      name="book"
+                      checked={!way}
+                      onClick={wayHandler}
+                    />
                     One way
                     <span></span>
                   </label>
@@ -81,9 +91,12 @@ const Search = () => {
                   <input className="inputbox textmuted" type="date" />
                 </div>
               </div>
-              <div className="col-md-6 col-12 mb-4"  style={{
+              <div
+                className="col-md-6 col-12 mb-4"
+                style={{
                   display: way ? "block" : "none",
-                }}>
+                }}
+              >
                 <div className="form-control d-flex flex-column">
                   <p className="h-blue">Return Date</p>
                   <input className="inputbox textmuted " type="date" />
@@ -140,13 +153,33 @@ const Search = () => {
               <div className="col-md-3">
                 <div className="form-control d-flex flex-column">
                   <p className="h-blue">Departure</p>
-                  <p className="h-blue-text"> 14:15</p>
+                  <div className="d-flex flex-row">
+                    <span
+                      className="h-blue-text me-4"
+                      style={{ display: "inline" }}
+                    >
+                      14:15
+                    </span>
+                    <span className="h-blue-text" style={{ display: "inline" }}>
+                      Stockholm
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-control d-flex flex-column">
                   <p className="h-blue">Arrival</p>
-                  <p className="h-blue-text"> 17:15</p>
+                  <div className="d-flex flex-row">
+                    <span
+                      className="h-blue-text me-4"
+                      style={{ display: "inline" }}
+                    >
+                      17:15
+                    </span>
+                    <span className="h-blue-text" style={{ display: "inline" }}>
+                      Oslo
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="col-md-3">
@@ -234,13 +267,33 @@ const Search = () => {
               <div className="col-md-3">
                 <div className="form-control d-flex flex-column">
                   <p className="h-blue">Departure</p>
-                  <p className="h-blue-text"> 14:15</p>
+                  <div className="d-flex flex-row">
+                    <span
+                      className="h-blue-text me-4"
+                      style={{ display: "inline" }}
+                    >
+                      14:15
+                    </span>
+                    <span className="h-blue-text" style={{ display: "inline" }}>
+                      Oslo
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-control d-flex flex-column">
                   <p className="h-blue">Arrival</p>
-                  <p className="h-blue-text"> 17:15</p>
+                  <div className="d-flex flex-row">
+                    <span
+                      className="h-blue-text me-4"
+                      style={{ display: "inline" }}
+                    >
+                      17:15
+                    </span>
+                    <span className="h-blue-text" style={{ display: "inline" }}>
+                      Oslo
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="col-md-3">
