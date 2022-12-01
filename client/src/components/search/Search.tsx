@@ -1,6 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
-import BookingModal from "../bookingModal/BookingModal";
+import SearchItemOutbound from "../searchItem/SearchItemOutbound";
+import SearchItemReturn from "../searchItem/SearchItemReturn";
+
 import "./search.css";
+
+interface SearchProps {
+  flightList: Flight[];
+}
 
 const Search = () => {
   const [way, setWay] = useState(true);
@@ -8,20 +15,27 @@ const Search = () => {
   const wayHandler = () => {
     setWay(!way);
   };
+  const [flightList, setFlightList] = useState<Flight[]>([]);
+  const [isSearched, setIsSearched] = useState(false);
 
-  const [showOutbound, setShowOutbound] = useState(false);
-  const showOutboundDetails = () => {
-    setShowOutbound(!showOutbound);
-  };
-
-  const [showReturn, setShowReturn] = useState(false);
-  const showReturnDetails = () => {
-    setShowReturn(!showReturn);
+  const searchHandler = () => {
+    setIsSearched(true);
+    const getFlightList = () => {
+      axios
+        .get("https://localhost:7232/api/Flights/GetAll")
+        .then((response) => {
+          setFlightList(response.data);
+        })
+        .catch((e) => {
+          alert(e.message);
+        });
+    };
+    getFlightList();
   };
 
   return (
     <>
-      <div className="App">
+      <div className="search">
         <div className="container rounded shadow-lg">
           <form action="">
             <div className="row">
@@ -88,7 +102,7 @@ const Search = () => {
               <div className="col-md-6 col-12 mb-4">
                 <div className="form-control d-flex flex-column">
                   <p className="h-blue">Departure Date</p>
-                  <input className="inputbox textmuted" type="date" />
+                  <input className="inputbox textmuted" type="date" required />
                 </div>
               </div>
               <div
@@ -129,240 +143,57 @@ const Search = () => {
                 </div>
               </div>
             </div>
-            <div className="btn btn-secondary form-control text-center">
-              All Flights
+            <div
+              className="btn btn-secondary form-control text-center"
+              onClick={searchHandler}
+            >
+              <a href="#outbound" style={{textDecoration:"none", color:"white"}}> All Flights </a>
+             
+              
             </div>
           </form>
         </div>
       </div>
+
       {/*/ OutBound */}
-      <div>
-        <div className="container rounded shadow-lg">
+      {isSearched && (
+        <div className="container rounded shadow-lg" id="outbound">
           <div className="col-md-12">
             <div className="form-control d-flex flex-row">
               <p className="h-blue-title">Outbound :</p>
               <br />
-              <p className="h-blue-text">Monday 28 Nov, 20022</p>
+              <p className="h-blue-text">Monday 28 Nov, 2022</p>
             </div>
           </div>
         </div>
+      )}
 
-        <div className="Card-Flight">
-          <div className="container rounded shadow-lg">
-            <div className="row">
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Departure</p>
-                  <div className="d-flex flex-row">
-                    <span
-                      className="h-blue-text me-4"
-                      style={{ display: "inline" }}
-                    >
-                      14:15
-                    </span>
-                    <span className="h-blue-text" style={{ display: "inline" }}>
-                      Stockholm
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Arrival</p>
-                  <div className="d-flex flex-row">
-                    <span
-                      className="h-blue-text me-4"
-                      style={{ display: "inline" }}
-                    >
-                      17:15
-                    </span>
-                    <span className="h-blue-text" style={{ display: "inline" }}>
-                      Oslo
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Duration</p>
-                  <p className="h-blue-text"> 3:00</p>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Price (For adults)</p>
-                  <p className="h-blue-text"> $1500</p>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div className="row">
-              <div
-                className="col-md-3"
-                style={{
-                  display: showOutbound ? "block" : "none",
-                }}
-              >
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Price (For children)</p>
-                  <p className="h-blue-text"> $1500</p>
-                </div>
-              </div>
-              <div
-                className="col-md-3"
-                style={{
-                  display: showOutbound ? "block" : "none",
-                }}
-              >
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Available Seats</p>
-                  <p className="h-blue-text"> 10</p>
-                </div>
-              </div>
-              <div
-                className="col-md-3 me-auto"
-                style={{
-                  display: showOutbound ? "none" : "block",
-                }}
-              >
-                <div
-                  className="btn btn-secondary form-control text-center"
-                  onClick={showOutboundDetails}
-                >
-                  Details
-                </div>
-              </div>
-              <div
-                className="col-md-3 me-auto"
-                style={{
-                  display: showOutbound ? "block" : "none",
-                }}
-              >
-                <div
-                  className="btn btn-secondary form-control text-center"
-                  onClick={showOutboundDetails}
-                >
-                  Book
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {flightList.map((flight) =>
+        flight.itineraries.map((itinerary) => (
+          <SearchItemOutbound itinerary={itinerary} flight={flight} />
+        ))
+      )}
+
       {/*/ Return */}
-      <div>
-        <div className="container rounded shadow-lg">
-          <div className="col-md-12">
-            <div className="form-control d-flex flex-row">
-              <p className="h-blue-title">Return :</p>
-              <br />
-              <p className="h-blue-text">Monday 28 Nov, 20022</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="Card-Flight">
+      {isSearched && (
+        <div>
           <div className="container rounded shadow-lg">
-            <div className="row">
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Departure</p>
-                  <div className="d-flex flex-row">
-                    <span
-                      className="h-blue-text me-4"
-                      style={{ display: "inline" }}
-                    >
-                      14:15
-                    </span>
-                    <span className="h-blue-text" style={{ display: "inline" }}>
-                      Oslo
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Arrival</p>
-                  <div className="d-flex flex-row">
-                    <span
-                      className="h-blue-text me-4"
-                      style={{ display: "inline" }}
-                    >
-                      17:15
-                    </span>
-                    <span className="h-blue-text" style={{ display: "inline" }}>
-                      Oslo
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Duration</p>
-                  <p className="h-blue-text"> 3:00</p>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Price (For adults)</p>
-                  <p className="h-blue-text"> $1500</p>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div className="row">
-              <div
-                className="col-md-3"
-                style={{
-                  display: showReturn ? "block" : "none",
-                }}
-              >
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Price (For children)</p>
-                  <p className="h-blue-text"> $1500</p>
-                </div>
-              </div>
-              <div
-                className="col-md-3"
-                style={{
-                  display: showReturn ? "block" : "none",
-                }}
-              >
-                <div className="form-control d-flex flex-column">
-                  <p className="h-blue">Available Seats</p>
-                  <p className="h-blue-text"> 10</p>
-                </div>
-              </div>
-              <div
-                className="col-md-3 me-auto"
-                style={{
-                  display: showReturn ? "none" : "block",
-                }}
-              >
-                <div
-                  className="btn btn-secondary form-control text-center"
-                  onClick={showReturnDetails}
-                >
-                  Details
-                </div>
-              </div>
-              <div
-                className="col-md-3 me-auto"
-                style={{
-                  display: showReturn ? "block" : "none",
-                }}
-              >
-                <div
-                  className="btn btn-secondary form-control text-center"
-                  onClick={showReturnDetails}
-                >
-                  Book
-                </div>
+            <div className="col-md-12">
+              <div className="form-control d-flex flex-row">
+                <p className="h-blue-title">Return :</p>
+                <br />
+                <p className="h-blue-text">Monday 28 Nov, 20022</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {flightList.map((flight) =>
+        flight.itineraries.map((itinerary) => (
+          <SearchItemReturn itinerary={itinerary} flight={flight} />
+        ))
+      )}
     </>
   );
 };

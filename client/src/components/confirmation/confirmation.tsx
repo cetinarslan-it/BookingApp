@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 function confirmation() {
   return (
     <div>
-      <div className="App">
+      <div className="bookingInfo" id="bookingInfo">
         <div className="container rounded shadow-lg">
           <form>
             <h2>Booking Info</h2>
@@ -95,46 +95,7 @@ function confirmation() {
                   </p>
                 </div>
               </div>
-              <div className="col-md-6 pe-3 mb-1 col-sm-12">
-                <div className="return">
-                  <p>
-                    <strong>Name:</strong> Stockholm-Oslo
-                  </p>
-                  <p>
-                    <strong>Surname:</strong> Monday 28, 17:00, 2022
-                  </p>
-                  <p>
-                    <strong>Gender:</strong> 1 Adult, 3 Children
-                  </p>
-                  <p>
-                    <strong>Mobile:</strong> SEK 5500
-                  </p>
-                  <p>
-                    <strong>Email:</strong> SEK 5500
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-6 pe-3 mb-1 col-sm-12">
-                <div className="return">
-                  <p>
-                    <strong>Name:</strong> Stockholm-Oslo
-                  </p>
-                  <p>
-                    <strong>Surname:</strong> Monday 28, 17:00, 2022
-                  </p>
-                  <p>
-                    <strong>Gender:</strong> 1 Adult, 3 Children
-                  </p>
-                  <p>
-                    <strong>Mobile:</strong> SEK 5500
-                  </p>
-                  <p>
-                    <strong>Email:</strong> SEK 5500
-                  </p>
-                </div>
-              </div>
               <div>
-                {" "}
                 <p className="total-price">
                   <strong className="pe-2">Total Price :</strong>SEK 22.000
                 </p>
@@ -144,7 +105,7 @@ function confirmation() {
                 <div className="btn btn-secondary form-control text-center"
                 onClick={()=>{Swal.fire({
                   icon: 'success',
-                  title: "Your have succesfully booked your ticket(s)...",
+                  title: "You have succesfully booked your ticket(s)...",
                   showConfirmButton: false,
                   timer: 1500
                 })}}>

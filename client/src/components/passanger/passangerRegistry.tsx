@@ -1,9 +1,11 @@
 import React from "react";
+import "./passangerRegistry.css";
 
-const passangerRegistry = () => {
+const PassangerRegistry = () => {
   return (
     <div>
-      <div className="App">
+      <hr id="passangerRegistry" style={{ marginBottom: "20%" }} />
+      <div className="passangerRegistry">
         <div className="container rounded shadow-lg">
           <form>
             <h2>Passanger Info</h2>
@@ -92,7 +94,12 @@ const passangerRegistry = () => {
                   type="submit"
                   className=" btn btn-secondary form-control text-center col-md-2 pe-3 mb-1 mt-3 col-sm-12"
                 >
-                  Add passanger
+                  <a
+                    href="#bookingInfo"
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    Booking Details
+                  </a>
                 </button>
               </div>
             </div>
@@ -103,4 +110,4 @@ const passangerRegistry = () => {
   );
 };
 
-export default passangerRegistry;
+export default PassangerRegistry;
