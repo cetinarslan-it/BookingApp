@@ -90,17 +90,17 @@ const PassangerRegistry = () => {
                 </select>
               </div>
               <div>
-                <a
-                  href="#bookingInfo"
-                  style={{ textDecoration: "none", color: "white" }}
+                <button
+                  type="submit"
+                  className=" btn btn-secondary form-control text-center col-md-2 pe-3 mb-1 mt-3 col-sm-12"
                 >
-                  <button
-                    type="submit"
-                    className=" btn btn-secondary form-control text-center col-md-2 pe-3 mb-1 mt-3 col-sm-12"
+                  <a
+                    href="#bookingInfo"
+                    style={{ textDecoration: "none", color: "white" }}
                   >
                     Booking Details
-                  </button>
-                </a>
+                  </a>
+                </button>
               </div>
             </div>
           </form>
