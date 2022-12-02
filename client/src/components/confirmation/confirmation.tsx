@@ -1,8 +1,26 @@
 import React, { useState } from "react";
 import "./confirmation.css";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function confirmation() {
+
+  const [passangerList, setPassangerList] = useState<Passanger[]>([]);
+
+  const passangerHandler = () => {
+    const getPassangerList = () => {
+      axios
+        .get("https://localhost:7232/api/Passangers/GetAll")
+        .then((response) => {
+          setPassangerList(response.data);
+        })
+        .catch((e) => {
+          alert(e.message);
+        });
+    };
+    getPassangerList();
+  };
+
   return (
     <div>
       <div className="bookingInfo" id="bookingInfo">

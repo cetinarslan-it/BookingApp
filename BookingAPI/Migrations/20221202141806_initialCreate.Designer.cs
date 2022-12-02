@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingAPI.Migrations
 {
     [DbContext(typeof(FlightBookingDbContext))]
-    [Migration("20221202131546_initialCreate")]
+    [Migration("20221202141806_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,6 +104,28 @@ namespace BookingAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Passangers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AgeGroup = "Adult",
+                            Email = "cetin@gmail.com",
+                            FirstName = "Cetin",
+                            Gender = "Male",
+                            LastName = "Arslan",
+                            Mobile = "072 777 77 77"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AgeGroup = "Child",
+                            Email = "metin@gmail.com",
+                            FirstName = "Metin",
+                            Gender = "Male",
+                            LastName = "Arslan",
+                            Mobile = "072 888 88 88"
+                        });
                 });
 
             modelBuilder.Entity("BookingAPI.Model.Price", b =>

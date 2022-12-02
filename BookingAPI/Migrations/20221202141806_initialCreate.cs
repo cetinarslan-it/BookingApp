@@ -82,6 +82,16 @@ namespace BookingAPI.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "Passangers",
+                columns: new[] { "Id", "AgeGroup", "Email", "FirstName", "Gender", "LastName", "Mobile" },
+                values: new object[] { 1, "Adult", "cetin@gmail.com", "Cetin", "Male", "Arslan", "072 777 77 77" });
+
+            migrationBuilder.InsertData(
+                table: "Passangers",
+                columns: new[] { "Id", "AgeGroup", "Email", "FirstName", "Gender", "LastName", "Mobile" },
+                values: new object[] { 2, "Child", "metin@gmail.com", "Metin", "Male", "Arslan", "072 888 88 88" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Itineraries_FlightId",
                 table: "Itineraries",

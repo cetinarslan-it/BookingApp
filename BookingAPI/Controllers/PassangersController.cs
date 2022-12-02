@@ -2,7 +2,7 @@ using BookingAPI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace flightFinderApi.Controllers
+namespace BookingAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
@@ -54,7 +54,6 @@ namespace flightFinderApi.Controllers
             }
             return Ok(passanger);
         }
-
 
         [HttpDelete]
         public async Task<IActionResult> DeletePassanger(int id)

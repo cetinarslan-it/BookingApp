@@ -1,6 +1,17 @@
 export { };
 
 declare global {
+
+  type Passanger ={
+    id: int;
+    firstName: string;
+    lastName: string;
+    mobile: string;
+    email: string;
+    gender: string;
+    ageGroup: string;
+  };
+
   type Flight = {
     id: string;
     departure: string;

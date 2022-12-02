@@ -20,5 +20,28 @@ using BookingAPI.Model;
             modelBuilder.Entity<Itinerary>().HasKey(i => i.Id);
             modelBuilder.Entity<Price>().HasKey(p => p.Id);
             modelBuilder.Entity<Passanger>().HasKey(g=>g.Id);
+
+            modelBuilder.Entity<Passanger>().HasData(
+                new Passanger
+                {
+                    Id = 1,
+                    FirstName = "Cetin",
+                    LastName = "Arslan",
+                    Mobile = "072 777 77 77",
+                    Email = "cetin@gmail.com",
+                    Gender = "Male",
+                    AgeGroup = "Adult",
+                },
+                 new Passanger
+                {
+                    Id = 2,
+                    FirstName = "Metin",
+                    LastName = "Arslan",
+                    Mobile = "072 888 88 88",
+                    Email = "metin@gmail.com",
+                    Gender = "Male",
+                    AgeGroup = "Child",
+                }
+            );
         }
     }

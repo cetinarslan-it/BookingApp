@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BookingAPI.Model;
 using Newtonsoft.Json;
 
 namespace BookingAPI.Model;
