@@ -6,7 +6,7 @@ function confirmation() {
   return (
     <div>
       <div className="bookingInfo" id="bookingInfo">
-        <div className="container rounded shadow-lg">
+        <div className="search rounded shadow-lg">
           <form>
             <h2>Booking Info</h2>
             <hr className="me-2" />

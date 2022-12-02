@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useState } from "react";
 import "./searchItem.css";
 
@@ -57,8 +58,14 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
             <div className="form-control d-flex flex-column">
               <p className="h-blue">Duration</p>
               <p className="h-blue-text" style={{ fontSize: "14px" }}>
-                {" "}
-                3:00
+                {moment
+                  .duration(
+                    moment(itinerary.arrivalAt.toString()).diff(
+                      moment(itinerary.departureAt.toString())
+                    )
+                  )
+                  .asHours()}
+                <i> hour(s)</i>
               </p>
             </div>
           </div>
@@ -118,17 +125,17 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
               display: showReturn ? "block" : "none",
             }}
           >
-            <div
-              className="btn btn-secondary form-control text-center"
-              onClick={showReturnDetails}
+            <a
+              href="#passangerRegistry"
+              style={{ textDecoration: "none", color: "white" }}
             >
-              <a
-                href="#passangerRegistry"
-                style={{ textDecoration: "none", color: "white" }}
+              <div
+                className="btn btn-secondary form-control text-center"
+                onClick={showReturnDetails}
               >
                 Book
-              </a>
-            </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>

@@ -5,19 +5,24 @@
   }
 
   .search{
-    margin-top:10%;
-    margin-bottom:20%;
+    background-color:rgba(243, 241, 241, 0.4);
+    margin: 8% auto 20%;
+    padding: 5px 10px;
+    max-width: 1000px
+  }
+
+  .outbound{
+    margin-top:2%;
+    margin-bottom:5%;
+  }
+
+  .return{
+    margin-top:2%;
+    margin-bottom:5%;
   }
   
   body {
     background-image: url("../../images/background.png");   
-  }
-  
-  .container { 
-    background-color:rgba(243, 241, 241, 0.4);
-    margin-top: 8% auto 1%;
-    padding: 5px 10px;
-    max-width: 800px
   }
   
   .box {
@@ -36,6 +41,7 @@
     padding-left: 4px;
     font-size: 22px;
   }
+  
   .h-blue-text {
     color: black;
     margin-bottom: 4px;

@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useState } from "react";
 import "./searchItem.css";
 
@@ -24,7 +25,7 @@ function SearchItemOutbound({ itinerary, flight }: SearchItemProps) {
                 className="h-blue-text me-4"
                 style={{ display: "inline", fontSize: "14px" }}
               >
-                {new Date(itinerary.departureAt).toLocaleTimeString()}
+                {moment(itinerary.departureAt.toString()).format("LLL")}
               </span>
               <span
                 className="h-blue-text"
@@ -43,7 +44,7 @@ function SearchItemOutbound({ itinerary, flight }: SearchItemProps) {
                 className="h-blue-text me-4"
                 style={{ display: "inline", fontSize: "14px" }}
               >
-                {new Date(itinerary.arrivalAt).toLocaleTimeString()}
+                {moment(itinerary.arrivalAt.toString()).format("LLL")}
               </span>
               <span
                 className="h-blue-text"
@@ -58,10 +59,14 @@ function SearchItemOutbound({ itinerary, flight }: SearchItemProps) {
           <div className="form-control d-flex flex-column">
             <p className="h-blue">Duration</p>
             <p className="h-blue-text" style={{ fontSize: "14px" }}>
-              {" "}
-              {new Date(itinerary.arrivalAt).getHours() -
-                new Date(itinerary.departureAt).getHours()}
-               hours
+              {moment
+                .duration(
+                  moment(itinerary.arrivalAt.toString()).diff(
+                    moment(itinerary.departureAt.toString())
+                  )
+                )
+                .asHours()}
+              <i> hour(s)</i>
             </p>
           </div>
         </div>
@@ -122,17 +127,17 @@ function SearchItemOutbound({ itinerary, flight }: SearchItemProps) {
             display: showOutbound ? "block" : "none",
           }}
         >
-          <div
-            className="btn btn-secondary form-control text-center"
-            onClick={showOutboundDetails}
+          <a
+            href="#passangerRegistry"
+            style={{ textDecoration: "none", color: "white" }}
           >
-            <a
-              href="#passangerRegistry"
-              style={{ textDecoration: "none", color: "white" }}
+            <div
+              className="btn btn-secondary form-control text-center"
+              onClick={showOutboundDetails}
             >
               Book
-            </a>
-          </div>
+            </div>{" "}
+          </a>
         </div>
       </div>
     </div>
