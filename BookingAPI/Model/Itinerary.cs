@@ -16,8 +16,7 @@ namespace BookingAPI.Model;
        
         [JsonProperty("avaliableSeats")]
         public int AvailableSeats { get; set; }
-
-        
+   
         [JsonProperty("prices")]
         public List<Price> Prices { get; set; }
 

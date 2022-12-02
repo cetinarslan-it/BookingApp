@@ -16,11 +16,4 @@ public class Price
         
         [JsonProperty("child")]
         public int ChildPrice { get; set; }
-
-
-       /* [JsonIgnore]
-        public int ItineraryId { get; set; }   
-
-        [JsonIgnore]
-        public Itinerary Itinerary { get; set; }*/
 }

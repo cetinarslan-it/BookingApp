@@ -9,7 +9,7 @@ const PassangerRegistry = () => {
         <div className="search rounded shadow-lg">
           <form>
             <h2>Passanger Info</h2>
-            <hr className="me-2" />
+            <hr className="me-2"  />
             <div className="row">
               <div className="col-md-4 pe-3 mb-1 col-sm-12">
                 <label htmlFor="exampleInputEmail1" className="form-label">
