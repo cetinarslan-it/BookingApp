@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using BookingAPI.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<FlightBookingDbContext>(options =>
@@ -7,6 +10,8 @@ builder.Services.AddDbContext<FlightBookingDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddTransient<IFlightService, FlightService>();
+builder.Services.AddTransient<IPassangerService, PassangerService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using BookingAPI.Services;
 
 namespace BookingAPI.Controllers
 {
@@ -7,57 +7,42 @@ namespace BookingAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class FlightsController : ControllerBase
     {
-        private readonly FlightBookingDbContext _context;
+        private readonly IFlightService _flightService;
 
-        public FlightsController(FlightBookingDbContext context)
+        public FlightsController(IFlightService flightService)
         {
-            _context = context;
+            _flightService = flightService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
-            var flights = await _context.Flights
-                .Include(f => f.Itineraries)
-                .ThenInclude(i => i.Prices)
-                .ToListAsync();
+            var flights = await _flightService.GetAllFlightsAsync();
+
+            if (flights == null)
+            {
+                return NotFound();
+            }
             return Ok(flights);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetSearchedList(string departure, string arrival, string departureAt, string? returnAt, int adultCount, int childCount)
-        {          
-            var flight = await _context.Flights
-                .Where(f => f.Departure == departure)
-                .Where(f => f.Arrival == arrival)
-                .Include(f => f.Itineraries
-                    .Where(i => DateTime.Parse(departureAt) == i.DepartureAt.Date ||
-                                DateTime.Parse(returnAt) == i.DepartureAt.Date)
-                    .Where(i => i.AvailableSeats >= adultCount + childCount))
-                .ThenInclude(i => i.Prices)
-                .ToListAsync();
-           
-            if (flight == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(flight);
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> GetById(string id)
+        public async Task<IActionResult> GetSearchedListAsync(string departure, string arrival, string departureAt, string? returnAt, int adultCount, int childCount)
         {
-            if (id == null || _context.Flights == null)
+            var flights = await _flightService.GetSearchedFlightListAsync(departure, arrival, departureAt, returnAt, adultCount, childCount);
+
+            if (flights == null)
             {
                 return NotFound();
             }
 
-            var flight = await _context.Flights
-                .Include(f => f.Itineraries)
-                .ThenInclude(i => i.Prices)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            return Ok(flights);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(string id)
+        {
+            var flight = await _flightService.GetFlightByIdAsync(id);
 
             if (flight == null)
             {
@@ -66,11 +51,6 @@ namespace BookingAPI.Controllers
 
             return Ok(flight);
         }
-
-      
-
-
-      
-    }    
+    }
 }
 

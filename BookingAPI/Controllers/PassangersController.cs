@@ -1,6 +1,6 @@
 using BookingAPI.Model;
+using BookingAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookingAPI.Controllers
 {
@@ -8,71 +8,59 @@ namespace BookingAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class PassangersController : ControllerBase
     {
-        private readonly FlightBookingDbContext _context;
+        private readonly IPassangerService _passangerService;
 
-        public PassangersController(FlightBookingDbContext context)
+        public PassangersController(IPassangerService passangerService)
         {
-            _context = context;
+            _passangerService = passangerService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
-            var passangers = await _context.Passangers
-                .ToListAsync();
+            var passangers = await _passangerService.GetAllPassangersAsync();
+
+            if (passangers == null)
+            {
+                return null;
+            }
             return Ok(passangers);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-            if (id == null || _context.Passangers == null)
-            {
-                return NotFound();
-            }
-
-            var passanger = await _context.Passangers
-                .FirstOrDefaultAsync(p => p.Id == id);
-
+            var passanger = await _passangerService.GetPassangerByIdAsync(id);
             if (passanger == null)
             {
                 return NotFound();
             }
-
             return Ok(passanger);
         }
 
         [HttpPost]
 
-        public async Task<IActionResult> CreatePassanger(Passanger passanger)
+        public async Task<IActionResult> CreateNewAsync(Passanger passanger)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(passanger);
-                await _context.SaveChangesAsync();
+            var newPassanger = await _passangerService.CreateNewPassangerAsync(passanger);
 
-            }
-            return Ok(passanger);
+            return Ok(newPassanger);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeletePassanger(int id)
+        public async Task<IActionResult> DeletePassangerAsync(int id)
         {
-            if (id == null || _context.Passangers == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var passanger = await _context.Passangers
-                .FirstOrDefaultAsync(p => p.Id == id);
+            var passanger = await _passangerService.DeletePassangerAsync(id);
 
             if (passanger == null)
             {
                 return NotFound();
             }
-
-            _context.Entry(passanger).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-            _context.SaveChanges();
 
             return Ok(passanger);
         }
