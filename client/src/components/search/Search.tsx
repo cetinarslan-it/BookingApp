@@ -1,4 +1,5 @@
 import axios from "axios";
+import { request } from "http";
 import moment from "moment";
 import React, { useState, useTransition } from "react";
 import internal from "stream";
@@ -127,10 +128,8 @@ const Search = () => {
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">From</p>
                 <select className="border-0 outline-none" name="departure" onClick={requestDataHandler.bind(this)}>
-                  <option value="" hidden selected>
-                    Stockholm
-                  </option>
-                  <option value="Stockholm">Stockholm</option>{" "}
+                  <option value="" hidden selected>{requestData.departure}</option>
+                  <option value="Stockholm">Stockholm</option>
                   <option value="Oslo">Oslo</option>
                   <option value="Amsterdam">Amsterdam</option>
                 </select>
@@ -140,10 +139,8 @@ const Search = () => {
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">To</p>
                 <select className="border-0 outline-none" name="arrival" onClick={requestDataHandler.bind(this)}>
-                  <option value="" hidden selected>
-                    Oslo
-                  </option>
-                  <option value="Stockholm">Stockholm</option>{" "}
+                  <option value="" hidden selected>{requestData.arrival}</option>
+                  <option value="Stockholm">Stockholm</option>
                   <option value="Oslo">Oslo</option>
                   <option value="Amsterdam">Amsterdam</option>
                 </select>
@@ -179,6 +176,7 @@ const Search = () => {
                   </option>
                   <option value="1">1</option> <option value="2">2</option>
                   <option value="3">3</option> <option value="4">4</option>
+                  <option value="5">5</option> <option value="6">6</option>
                 </select>
               </div>
             </div>
