@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using BookingAPI.Services;
+using BookingAPI.Model;
 
 namespace BookingAPI.Controllers
 {
@@ -26,10 +27,10 @@ namespace BookingAPI.Controllers
             return Ok(flights);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetSearchedListAsync(string departure, string arrival, string departureAt, string? returnAt, int adultCount, int childCount)
+        [HttpPost]
+        public async Task<IActionResult> GetSearchedListAsync(SearchRequest request)
         {
-            var flights = await _flightService.GetSearchedFlightListAsync(departure, arrival, departureAt, returnAt, adultCount, childCount);
+            var flights = await _flightService.GetSearchedFlightListAsync(request);
 
             if (flights == null)
             {

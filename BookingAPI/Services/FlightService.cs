@@ -26,15 +26,15 @@ public class FlightService : IFlightService
         return flights;
     }
 
-    public async Task<List<Flight>> GetSearchedFlightListAsync(string departure, string arrival, string departureAt, string? returnAt, int adultCount, int childCount)
+    public async Task<List<Flight>> GetSearchedFlightListAsync(SearchRequest request)
     {
         var flight = await _context.Flights
-            .Where(f => f.Departure == departure)
-            .Where(f => f.Arrival == arrival)
+            .Where(f => f.Departure == request.Departure)
+            .Where(f => f.Arrival == request.Arrival)
             .Include(f => f.Itineraries
-                .Where(i => DateTime.Parse(departureAt) == i.DepartureAt.Date ||
-                            DateTime.Parse(returnAt) == i.DepartureAt.Date)
-                .Where(i => i.AvailableSeats >= adultCount + childCount))
+                .Where(i => DateTime.Parse(request.DepartureAt) == i.DepartureAt.Date ||
+                            DateTime.Parse(request.ReturnAt) == i.DepartureAt.Date)
+                .Where(i => i.AvailableSeats >= request.AdultCount + request.ChildCount))
             .ThenInclude(i => i.Prices)
             .ToListAsync();
 

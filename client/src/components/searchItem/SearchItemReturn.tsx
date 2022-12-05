@@ -24,7 +24,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
                   className="h-blue-text me-4"
                   style={{ display: "inline", fontSize: "14px" }}
                 >
-                  {new Date(itinerary.departureAt).toLocaleTimeString()}
+                  {moment(itinerary.departureAt.toString()).format("LLL")}
                 </span>
                 <span
                   className="h-blue-text"
@@ -43,7 +43,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
                   className="h-blue-text me-4"
                   style={{ display: "inline", fontSize: "14px" }}
                 >
-                  {new Date(itinerary.arrivalAt).toLocaleTimeString()}
+                  {moment(itinerary.departureAt.toString()).format("LLL")}
                 </span>
                 <span
                   className="h-blue-text"
