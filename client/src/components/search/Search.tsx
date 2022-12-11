@@ -13,12 +13,12 @@ interface SearchProps {
 }
 
 interface SearchData {
-  departure: string;     
-  arrival:string ;
+  departure: string;
+  arrival: string;
   departureAt: string;
   returnAt: string;
   adultCount: number;
-  childCount: number ;   
+  childCount: number;
 }
 
 const Search = () => {
@@ -30,7 +30,7 @@ const Search = () => {
 
   const [isSearched, setIsSearched] = useState(false);
 
- /* const searchHandler1 = () => {
+  /* const searchHandler1 = () => {
     setIsSearched(true);
     const getFlightList = () => {
       axios
@@ -46,23 +46,23 @@ const Search = () => {
   };*/
 
   const [requestData, setRequestData] = useState<SearchData>({
-    departure:"Oslo",   
-    arrival:"Stockholm",
-    departureAt:"2022-12-12",
-    returnAt:"2022-12-12",
-    adultCount:0,
-    childCount:0 
-  })
+    departure: "Oslo",
+    arrival: "Stockholm",
+    departureAt: "2022-12-12",
+    returnAt: "2022-12-12",
+    adultCount: 0,
+    childCount: 0,
+  });
 
   const [flightList, setFlightList] = useState<Flight[]>([]);
 
-  const requestDataHandler = (e:any) => {
+  const requestDataHandler = (e: any) => {
     const { name, value } = e.target;
     let requestDataRef = { ...requestData, [name]: value };
     setRequestData(requestDataRef);
   };
 
- /* console.log(requestData.departure);
+  /* console.log(requestData.departure);
   console.log(requestData.arrival);
   console.log(requestData.departureAt);
   console.log(requestData.returnAt);
@@ -70,13 +70,11 @@ const Search = () => {
   console.log(requestData.adultCount); */
 
   const searchHandler = () => {
-
     setIsSearched(true);
 
     const getSearchedFlightList = () => {
       axios
-        .post("https://localhost:7232/api/Flights/GetSearchedList", requestData
-        )
+        .post("https://localhost:7232/api/Flights/GetSearchedList", requestData)
         .then((response) => {
           setFlightList(response.data);
         })
@@ -127,8 +125,14 @@ const Search = () => {
             <div className="col-md-6 mb-4">
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">From</p>
-                <select className="border-0 outline-none" name="departure" onClick={requestDataHandler.bind(this)}>
-                  <option value="" hidden selected>{requestData.departure}</option>
+                <select
+                  className="border-0 outline-none"
+                  name="departure"
+                  onClick={requestDataHandler.bind(this)}
+                >
+                  <option value="" hidden selected>
+                    {requestData.departure}
+                  </option>
                   <option value="Stockholm">Stockholm</option>
                   <option value="Oslo">Oslo</option>
                   <option value="Amsterdam">Amsterdam</option>
@@ -138,8 +142,14 @@ const Search = () => {
             <div className="col-md-6 mb-4">
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">To</p>
-                <select className="border-0 outline-none" name="arrival" onClick={requestDataHandler.bind(this)}>
-                  <option value="" hidden selected>{requestData.arrival}</option>
+                <select
+                  className="border-0 outline-none"
+                  name="arrival"
+                  onClick={requestDataHandler.bind(this)}
+                >
+                  <option value="" hidden selected>
+                    {requestData.arrival}
+                  </option>
                   <option value="Stockholm">Stockholm</option>
                   <option value="Oslo">Oslo</option>
                   <option value="Amsterdam">Amsterdam</option>
@@ -151,7 +161,13 @@ const Search = () => {
             <div className="col-md-6 col-12 mb-4">
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">Departure Date</p>
-                <input className="inputbox textmuted"  type="date" name="departureAt" onChange={requestDataHandler.bind(this)} required/>
+                <input
+                  className="inputbox textmuted"
+                  type="date"
+                  name="departureAt"
+                  onChange={requestDataHandler.bind(this)}
+                  required
+                />
               </div>
             </div>
             <div
@@ -162,7 +178,12 @@ const Search = () => {
             >
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">Return Date</p>
-                <input className="inputbox textmuted" type="date" name="returnAt" onChange={requestDataHandler.bind(this)}/>
+                <input
+                  className="inputbox textmuted"
+                  type="date"
+                  name="returnAt"
+                  onChange={requestDataHandler.bind(this)}
+                />
               </div>
             </div>
           </div>
@@ -170,7 +191,11 @@ const Search = () => {
             <div className="col-md-6 mb-4">
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">Adult(18+)</p>
-                <select className="border-0 outline-none" name="adultCount" onClick={requestDataHandler.bind(this)}>
+                <select
+                  className="border-0 outline-none"
+                  name="adultCount"
+                  onClick={requestDataHandler.bind(this)}
+                >
                   <option value="" hidden selected>
                     0
                   </option>
@@ -183,7 +208,11 @@ const Search = () => {
             <div className="col-md-6 mb-4">
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">Child/Children(0-17)</p>
-                <select className="border-0 outline-none" name="childCount" onClick={requestDataHandler.bind(this)}>
+                <select
+                  className="border-0 outline-none"
+                  name="childCount"
+                  onClick={requestDataHandler.bind(this)}
+                >
                   <option value="" hidden selected>
                     0
                   </option>
@@ -215,20 +244,30 @@ const Search = () => {
             <div className="form-control d-flex flex-row">
               <p className="h-blue-title">Outbound :</p>
               <br />
-              <p className="h-blue-text">{requestData.departureAt.toString()} </p>
+              <p className="h-blue-text">
+                {requestData.departureAt.toString()}{" "}
+              </p>
             </div>
           </div>
         </div>
       )}
 
-      {flightList.map((flight) =>
-        flight.itineraries.map((itinerary) => (
-          <SearchItemOutbound itinerary={itinerary} flight={flight} />
-        ))
-      )}
+      {flightList
+        .filter((f) => f.departure === requestData.departure)
+        .map((flight) =>
+          flight.itineraries
+            .filter(
+              (i) =>
+                new Date(i.departureAt).toDateString() ===
+                new Date(requestData.departureAt).toDateString()
+            )
+            .map((itinerary) => (
+              <SearchItemOutbound itinerary={itinerary} flight={flight} />
+            ))
+        )}
 
       {/*/ Return */}
-      {isSearched && (way && (
+      {isSearched && way && (
         <div className="search return rounded shadow-lg">
           <div className="col-md-12">
             <div className="form-control d-flex flex-row">
@@ -237,14 +276,22 @@ const Search = () => {
               <p className="h-blue-text">{requestData.returnAt.toString()}</p>
             </div>
           </div>
-        </div> ))
-     }
-
-      {flightList.map((flight) =>
-        flight.itineraries.map((itinerary) => (
-          <SearchItemReturn itinerary={itinerary} flight={flight} />
-        ))
+        </div>
       )}
+
+      {flightList
+        .filter((f) => f.departure === requestData.arrival)
+        .map((flight) =>
+          flight.itineraries
+            .filter(
+              (i) =>
+                new Date(i.departureAt).toDateString() ===
+                new Date(requestData.returnAt).toDateString()
+            )
+            .map((itinerary) => (
+              <SearchItemOutbound itinerary={itinerary} flight={flight} />
+            ))
+        )}
     </>
   );
 };

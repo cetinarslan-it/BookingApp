@@ -29,13 +29,20 @@ public class FlightService : IFlightService
     public async Task<List<Flight>> GetSearchedFlightListAsync(SearchRequest request)
     {
         var flight = await _context.Flights
-            .Where(f => f.Departure == request.Departure)
-            .Where(f => f.Arrival == request.Arrival)
+
+            .Where(f => f.Departure == request.Departure || 
+                        f.Departure == request.Arrival)
+
+            .Where(f => f.Arrival == request.Arrival ||
+                        f.Arrival == request.Departure)
+
             .Include(f => f.Itineraries
-                .Where(i => DateTime.Parse(request.DepartureAt) == i.DepartureAt.Date ||
-                            DateTime.Parse(request.ReturnAt) == i.DepartureAt.Date)
+                .Where(i => i.DepartureAt.Date == DateTime.Parse(request.DepartureAt) ||
+                            i.DepartureAt.Date == DateTime.Parse(request.ReturnAt) )
                 .Where(i => i.AvailableSeats >= request.AdultCount + request.ChildCount))
+
             .ThenInclude(i => i.Prices)
+            
             .ToListAsync();
 
         if (flight == null)

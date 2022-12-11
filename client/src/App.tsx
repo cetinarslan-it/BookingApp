@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Confirmation from "./components/confirmation/confirmation";
 import Footer from "./components/footer/Footer";
 import NavBar from "./components/navbar/NavBar";
-import PassangerRegistry from "./components/passanger/PassangerRegistry";
+import PassangerRegistry from "./components/passanger/passangerRegistry";
 import Search from "./components/search/Search";
 import "./App.css";
 

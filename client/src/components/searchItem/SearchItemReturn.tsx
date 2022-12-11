@@ -17,7 +17,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
       <div className="containerItem rounded shadow-lg">
         <div className="row">
           <div className="col-md-3">
-            <div className="form-control d-flex flex-column">
+            <div className="form-control d-flex flex-column input-height">
               <p className="h-blue">Departure</p>
               <div className="d-flex flex-row">
                 <span
@@ -36,7 +36,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
             </div>
           </div>
           <div className="col-md-3">
-            <div className="form-control d-flex flex-column">
+            <div className="form-control d-flex flex-column input-height">
               <p className="h-blue">Arrival</p>
               <div className="d-flex flex-row">
                 <span
@@ -55,7 +55,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
             </div>
           </div>
           <div className="col-md-3">
-            <div className="form-control d-flex flex-column">
+            <div className="form-control d-flex flex-column input-height">
               <p className="h-blue">Duration</p>
               <p className="h-blue-text" style={{ fontSize: "14px" }}>
                 {moment
@@ -70,7 +70,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
             </div>
           </div>
           <div className="col-md-3">
-            <div className="form-control d-flex flex-column">
+            <div className="form-control d-flex flex-column input-height">
               <p className="h-blue">Price (For adults)</p>
               <p className="h-blue-text" style={{ fontSize: "14px" }}>
                 SEK {itinerary.prices[0].adultPrice}
@@ -86,7 +86,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
               display: showReturn ? "block" : "none",
             }}
           >
-            <div className="form-control d-flex flex-column">
+            <div className="form-control d-flex flex-column input-height">
               <p className="h-blue">Price (For children)</p>
               <p className="h-blue-text" style={{ fontSize: "14px" }}>
                 SEK {itinerary.prices[0].childPrice}
@@ -99,7 +99,7 @@ function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
               display: showReturn ? "block" : "none",
             }}
           >
-            <div className="form-control d-flex flex-column">
+            <div className="form-control d-flex flex-column input-height">
               <p className="h-blue">Available Seats</p>
               <p className="h-blue-text" style={{ fontSize: "14px" }}>
                 {itinerary.availableSeats}

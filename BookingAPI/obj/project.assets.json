@@ -10034,11 +10034,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Admin\\OneDrive\\Skrivbord\\BookingApp\\BookingAPI\\BookingAPI.csproj",
+      "projectUniqueName": "D:\\Projects\\BookingApp\\BookingAPI\\BookingAPI.csproj",
       "projectName": "BookingAPI",
-      "projectPath": "c:\\Users\\Admin\\OneDrive\\Skrivbord\\BookingApp\\BookingAPI\\BookingAPI.csproj",
+      "projectPath": "D:\\Projects\\BookingApp\\BookingAPI\\BookingAPI.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Admin\\OneDrive\\Skrivbord\\BookingApp\\BookingAPI\\obj\\",
+      "outputPath": "D:\\Projects\\BookingApp\\BookingAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

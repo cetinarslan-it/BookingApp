@@ -11,7 +11,7 @@ namespace BookingAPI.Model
         [Required]       
         public string Arrival { get; set; } 
         public string DepartureAt { get; set; } 
-        public string? ReturnAt { get; set; } 
+        public string ReturnAt { get; set; } 
         public int AdultCount { get; set; }
         public int ChildCount { get; set; }
     }
