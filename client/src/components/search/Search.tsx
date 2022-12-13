@@ -5,12 +5,7 @@ import React, { useState, useTransition } from "react";
 import internal from "stream";
 import SearchItemOutbound from "../searchItem/SearchItemOutbound";
 import SearchItemReturn from "../searchItem/SearchItemReturn";
-
 import "./search.css";
-
-interface SearchProps {
-  flightList: Flight[];
-}
 
 interface SearchData {
   departure: string;
@@ -30,21 +25,6 @@ const Search = () => {
 
   const [isSearched, setIsSearched] = useState(false);
 
-  /* const searchHandler1 = () => {
-    setIsSearched(true);
-    const getFlightList = () => {
-      axios
-        .get("https://localhost:7232/api/Flights/GetAll")
-        .then((response) => {
-          setFlightList(response.data);
-        })
-        .catch((e) => {
-          alert(e.message);
-        });
-    };
-    getFlightList();
-  };*/
-
   const [requestData, setRequestData] = useState<SearchData>({
     departure: "Oslo",
     arrival: "Stockholm",
@@ -62,16 +42,8 @@ const Search = () => {
     setRequestData(requestDataRef);
   };
 
-  /* console.log(requestData.departure);
-  console.log(requestData.arrival);
-  console.log(requestData.departureAt);
-  console.log(requestData.returnAt);
-  console.log(requestData.childCount);
-  console.log(requestData.adultCount); */
-
   const searchHandler = () => {
     setIsSearched(true);
-
     const getSearchedFlightList = () => {
       axios
         .post("https://localhost:7232/api/Flights/GetSearchedList", requestData)
@@ -87,7 +59,7 @@ const Search = () => {
 
   return (
     <>
-      <div className=" search rounded shadow-lg">
+      <div className="search rounded shadow-lg">
         <form action="">
           <div className="row">
             <div className="col-md-2 pe-0 col-sm-12">
@@ -224,14 +196,14 @@ const Search = () => {
             </div>
           </div>
           <a
-            href="#outbound"
+            href="#outboundPart"
             style={{ textDecoration: "none", color: "white" }}
           >
             <div
               className="btn btn-secondary form-control text-center"
               onClick={searchHandler}
             >
-              All Flights
+              Available Flights
             </div>
           </a>
         </form>
@@ -239,7 +211,7 @@ const Search = () => {
 
       {/*/ OutBound */}
       {isSearched && (
-        <div className="search outbound rounded shadow-lg" id="outbound">
+        <div id="outboundPart" className="search outbound rounded shadow-lg" >
           <div className="col-md-12">
             <div className="form-control d-flex flex-row">
               <p className="h-blue-title">Outbound :</p>
@@ -262,13 +234,14 @@ const Search = () => {
                 new Date(requestData.departureAt).toDateString()
             )
             .map((itinerary) => (
-              <SearchItemOutbound itinerary={itinerary} flight={flight} />
+              <SearchItemOutbound itinerary={itinerary} flight={flight} way={way} />
             ))
         )}
 
       {/*/ Return */}
       {isSearched && way && (
-        <div className="search return rounded shadow-lg">
+        <div className="search return rounded shadow-lg" >
+          <hr id="#returnPart"></hr>
           <div className="col-md-12">
             <div className="form-control d-flex flex-row">
               <p className="h-blue-title">Return :</p>
@@ -289,7 +262,7 @@ const Search = () => {
                 new Date(requestData.returnAt).toDateString()
             )
             .map((itinerary) => (
-              <SearchItemOutbound itinerary={itinerary} flight={flight} />
+              <SearchItemReturn itinerary={itinerary} flight={flight} way={way}/>
             ))
         )}
     </>

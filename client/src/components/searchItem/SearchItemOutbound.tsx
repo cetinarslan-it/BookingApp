@@ -5,9 +5,10 @@ import "./searchItem.css";
 interface SearchItemProps {
   itinerary: Itinerary;
   flight: Flight;
+  way : boolean;
 }
 
-function SearchItemOutbound({ itinerary, flight }: SearchItemProps) {
+function SearchItemOutbound({ itinerary, flight, way}: SearchItemProps) {
   const [showOutbound, setShowOutbound] = useState(false);
 
   const showOutboundDetails = () => {
@@ -128,15 +129,15 @@ function SearchItemOutbound({ itinerary, flight }: SearchItemProps) {
           }}
         >
           <a
-            href="#passangerRegistry"
+            href={ way? "#returnPart" : "#passangerRegistry"}
             style={{ textDecoration: "none", color: "white" }}
-          >
+          > 
             <div
               className="btn btn-secondary form-control text-center"
               onClick={showOutboundDetails}
             >
               Book
-            </div>{" "}
+            </div>
           </a>
         </div>
       </div>

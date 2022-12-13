@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <div>
       <nav className="navbar shadow-lg">
-        <span className="navbar-brand m-auto">Flight Booking App</span>
+        <p className="app-title m-auto">Flight Booking App</p>
       </nav>
     </div>
   );

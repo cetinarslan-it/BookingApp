@@ -1,13 +1,9 @@
-.navbar-brand {
+.app-title {
     height:60px; 
-    font-size:40px;
+    font-size:2rem;
     font-weight: bold ;
-    color:darkslategray;
+    color:brown;
   }
   .navbar {
     background-color:rgba(243, 241, 241, 0.4); 
-  }
-
-  span{
-    color:brown;
   }

@@ -3,7 +3,7 @@ import "./confirmation.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-function confirmation() {
+function Confirmation() {
 
   const [passangerList, setPassangerList] = useState<Passanger[]>([]);
 
@@ -87,7 +87,7 @@ function confirmation() {
                     <strong>Gender:</strong> 1 Adult, 3 Children
                   </p>
                   <p>
-                    <strong>Mobile:</strong> SEK 5500
+                    <strong>Mobile:</strong> 076 777 77 77
                   </p>
                   <p>
                     <strong>Email:</strong> SEK 5500
@@ -106,7 +106,7 @@ function confirmation() {
                     <strong>Gender:</strong> 1 Adult, 3 Children
                   </p>
                   <p>
-                    <strong>Mobile:</strong> SEK 5500
+                    <strong>Mobile:</strong> 076 777 77 77
                   </p>
                   <p>
                     <strong>Email:</strong> SEK 5500
@@ -138,4 +138,4 @@ function confirmation() {
   );
 }
 
-export default confirmation;
+export default Confirmation;

@@ -5,10 +5,12 @@ import "./searchItem.css";
 interface SearchItemProps {
   itinerary: Itinerary;
   flight: Flight;
+  way: boolean;
 }
 
-function SearchItemReturn({ itinerary, flight }: SearchItemProps) {
+function SearchItemReturn({ itinerary, flight , way}: SearchItemProps) {
   const [showReturn, setShowReturn] = useState(false);
+  
   const showReturnDetails = () => {
     setShowReturn(!showReturn);
   };

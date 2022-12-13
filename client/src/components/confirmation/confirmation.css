@@ -2,17 +2,20 @@
   background-color: rgba(250, 237, 237, 0.4);
   padding: 0.5rem;
   border-radius: 2%;
-  margin-bottom: 0.5rem;
+}
+
+.return>p{
+  margin-bottom: 0.3rem;
 }
 
 .passanger-list {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .total-price {
   background-color: rgba(250, 237, 237, 0.4);
   margin-top: 0.1rem;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
