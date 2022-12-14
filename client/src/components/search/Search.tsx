@@ -1,22 +1,22 @@
 import axios from "axios";
-import { request } from "http";
-import moment from "moment";
 import React, { useState, useTransition } from "react";
-import internal from "stream";
 import SearchItemOutbound from "../searchItem/SearchItemOutbound";
 import SearchItemReturn from "../searchItem/SearchItemReturn";
 import "./search.css";
 
-interface SearchData {
-  departure: string;
-  arrival: string;
-  departureAt: string;
-  returnAt: string;
-  adultCount: number;
-  childCount: number;
+interface SearchProps
+{
+  setBookingDetailsOutbound: (bookingDetailsOutbound:BookingDetails) => void;
+  setBookingDetailsReturn: (bookingDetailsReturn:BookingDetails) => void;
+  flightList:Flight[];
+  setFlightList: (flightList:Flight[]) => void;
+  requestData:SearchDetails;
+  setRequestData: (requestData:SearchDetails) => void;
+  
 }
 
-const Search = () => {
+const Search = ({setBookingDetailsOutbound, setBookingDetailsReturn, flightList, setFlightList, requestData, setRequestData}:SearchProps) => {
+
   const [way, setWay] = useState(true);
 
   const wayHandler = () => {
@@ -25,16 +25,7 @@ const Search = () => {
 
   const [isSearched, setIsSearched] = useState(false);
 
-  const [requestData, setRequestData] = useState<SearchData>({
-    departure: "Oslo",
-    arrival: "Stockholm",
-    departureAt: "2022-12-12",
-    returnAt: "2022-12-12",
-    adultCount: 0,
-    childCount: 0,
-  });
-
-  const [flightList, setFlightList] = useState<Flight[]>([]);
+  
 
   const requestDataHandler = (e: any) => {
     const { name, value } = e.target;
@@ -234,14 +225,13 @@ const Search = () => {
                 new Date(requestData.departureAt).toDateString()
             )
             .map((itinerary) => (
-              <SearchItemOutbound itinerary={itinerary} flight={flight} way={way} />
+              <SearchItemOutbound itinerary={itinerary} flight={flight} way={way} setBookingDetailsOutbound={setBookingDetailsOutbound}/>
             ))
         )}
 
       {/*/ Return */}
       {isSearched && way && (
-        <div className="search return rounded shadow-lg" >
-          <hr id="#returnPart"></hr>
+        <div id="returnPart" className="search return rounded shadow-lg">
           <div className="col-md-12">
             <div className="form-control d-flex flex-row">
               <p className="h-blue-title">Return :</p>
@@ -262,7 +252,7 @@ const Search = () => {
                 new Date(requestData.returnAt).toDateString()
             )
             .map((itinerary) => (
-              <SearchItemReturn itinerary={itinerary} flight={flight} way={way}/>
+              <SearchItemReturn itinerary={itinerary} flight={flight} way={way} setBookingDetailsReturn={setBookingDetailsReturn}/>
             ))
         )}
     </>

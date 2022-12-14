@@ -33,4 +33,24 @@ declare global {
     adultPrice: number;
     childPrice: number;
   };  
+
+  interface SearchDetails {
+    departure: string;
+    arrival: string;
+    departureAt: string;
+    returnAt: string;
+    adultCount: number;
+    childCount: number;
+  }
+
+  interface BookingDetails {
+    departure: string;
+    arrival: string;
+    departureAt: Date;
+    arrivalAt:Date;
+    duration: number;
+    availableSeats: number;
+    adultPrice: number;
+    childPrice: number;
+  }
 }

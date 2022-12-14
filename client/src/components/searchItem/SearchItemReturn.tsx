@@ -6,14 +6,41 @@ interface SearchItemProps {
   itinerary: Itinerary;
   flight: Flight;
   way: boolean;
+  setBookingDetailsReturn: (bookingDetailsReturn: BookingDetails) => void;
 }
 
-function SearchItemReturn({ itinerary, flight , way}: SearchItemProps) {
+function SearchItemReturn({
+  itinerary,
+  flight,
+  way,
+  setBookingDetailsReturn,
+}: SearchItemProps) {
   const [showReturn, setShowReturn] = useState(false);
-  
+
   const showReturnDetails = () => {
     setShowReturn(!showReturn);
   };
+
+  const handleBook = () => {
+    setShowReturn(!showReturn);
+    setBookingDetailsReturn({
+      departure: flight.departure,
+      arrival: flight.arrival,
+      departureAt: itinerary.departureAt,
+      arrivalAt: itinerary.arrivalAt,
+      duration: moment
+        .duration(
+          moment(itinerary.arrivalAt.toString()).diff(
+            moment(itinerary.departureAt.toString())
+          )
+        )
+        .asHours(),
+      availableSeats: itinerary.availableSeats,
+      adultPrice: itinerary.prices[0].adultPrice,
+      childPrice: itinerary.prices[0].childPrice,
+    });
+  };
+
   return (
     <div className="Card-Flight">
       <div className="containerItem rounded shadow-lg">
@@ -118,7 +145,20 @@ function SearchItemReturn({ itinerary, flight , way}: SearchItemProps) {
               className="btn btn-secondary form-control text-center"
               onClick={showReturnDetails}
             >
-              Details
+              More Details
+            </div>
+          </div>
+          <div
+            className="col-md-3 me-auto"
+            style={{
+              display: showReturn ? "block" : "none",
+            }}
+          >
+            <div
+              className="btn btn-secondary form-control text-center"
+              onClick={showReturnDetails}
+            >
+              Less Details
             </div>
           </div>
           <div
@@ -133,7 +173,7 @@ function SearchItemReturn({ itinerary, flight , way}: SearchItemProps) {
             >
               <div
                 className="btn btn-secondary form-control text-center"
-                onClick={showReturnDetails}
+                onClick={handleBook}
               >
                 Book
               </div>

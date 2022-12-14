@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import "./confirmation.css";
 import Swal from "sweetalert2";
 import axios from "axios";
+import moment from "moment";
 
-function Confirmation() {
+interface ConfirmationProps {
+  bookingDetailsOutbound: BookingDetails;
+  bookingDetailsReturn: BookingDetails;
+  flightList:Flight[];
+  requestData:SearchDetails;
+}
 
+const Confirmation = ({ bookingDetailsOutbound, bookingDetailsReturn, flightList, requestData}: ConfirmationProps) => {
   const [passangerList, setPassangerList] = useState<Passanger[]>([]);
 
   const passangerHandler = () => {
@@ -35,16 +42,31 @@ function Confirmation() {
                 <hr />
                 <div className="return">
                   <p>
-                    <strong>Flight:</strong> Stockholm-Oslo
+                    <strong>Flight:</strong> {bookingDetailsOutbound.departure} - {" "}
+                    {bookingDetailsOutbound.arrival}
                   </p>
                   <p>
-                    <strong>Date:</strong> Monday 28, 17:00, 2022
+                    <strong>Date:</strong>{" "}
+                    {moment(bookingDetailsOutbound.departureAt.toString()).format(
+                      "LLL"
+                    )}
                   </p>
                   <p>
-                    <strong>Number:</strong> 1 Adult, 3 Children
+                    <strong>Duration:</strong>{" "}
+                    {moment
+                      .duration(
+                        moment(bookingDetailsOutbound.arrivalAt.toString()).diff(
+                          moment(bookingDetailsOutbound.departureAt.toString())
+                        )
+                      )
+                      .asHours()}
+                    <i> hour(s)</i>
                   </p>
                   <p>
-                    <strong>Price:</strong> SEK 5500
+                    <strong>Seats:</strong> {(requestData.adultCount*1)+ (requestData.childCount*1)}
+                  </p>
+                  <p>
+                    <strong>Price:</strong> SEK {requestData.adultCount*bookingDetailsOutbound.adultPrice+requestData.childCount*bookingDetailsOutbound.childPrice}
                   </p>
                 </div>
               </div>
@@ -54,16 +76,28 @@ function Confirmation() {
                 <hr />
                 <div className="return">
                   <p>
-                    <strong>Flight:</strong> Stockholm-Oslo
+                    <strong>Flight:</strong> {bookingDetailsReturn.departure} - {" "}
+                    {bookingDetailsReturn.arrival}
                   </p>
                   <p>
-                    <strong>Date:</strong> Monday 28, 17:00, 2022
+                    <strong>Date:</strong>  {moment(bookingDetailsReturn.departureAt.toString()).format("LLL")}
                   </p>
                   <p>
-                    <strong>Number:</strong> 1 Adult, 3 Children
+                    <strong>Duration:</strong>{" "}
+                    {moment
+                      .duration(
+                        moment(bookingDetailsReturn.arrivalAt.toString()).diff(
+                          moment(bookingDetailsReturn.departureAt.toString())
+                        )
+                      )
+                      .asHours()}
+                    <i> hour(s)</i>
                   </p>
                   <p>
-                    <strong>Price:</strong> SEK 5500
+                    <strong>Seats:</strong> {(requestData.adultCount*1)+ (requestData.childCount*1)}
+                  </p>
+                  <p>
+                    <strong>Price:</strong> SEK {requestData.adultCount*bookingDetailsOutbound.adultPrice+requestData.childCount*bookingDetailsOutbound.childPrice}
                   </p>
                 </div>
               </div>
@@ -120,13 +154,17 @@ function Confirmation() {
               </div>
 
               <div>
-                <div className="btn btn-secondary form-control text-center"
-                onClick={()=>{Swal.fire({
-                  icon: 'success',
-                  title: "You have succesfully booked your ticket(s)...",
-                  showConfirmButton: false,
-                  timer: 1500
-                })}}>
+                <div
+                  className="btn btn-secondary form-control text-center"
+                  onClick={() => {
+                    Swal.fire({
+                      icon: "success",
+                      title: "You have succesfully booked your ticket(s)...",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                  }}
+                >
                   Confirm Booking
                 </div>
               </div>

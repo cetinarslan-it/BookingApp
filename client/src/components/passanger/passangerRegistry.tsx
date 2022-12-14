@@ -2,6 +2,7 @@ import React from "react";
 import "./passangerRegistry.css";
 
 const PassangerRegistry = () => {
+
   return (
     <div>
       <hr id="passangerRegistry" style={{ marginBottom: "10%" }} />
