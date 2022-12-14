@@ -12,20 +12,19 @@ interface SearchProps
   setFlightList: (flightList:Flight[]) => void;
   requestData:SearchDetails;
   setRequestData: (requestData:SearchDetails) => void;
-  
+  way:boolean;
+  setWay: (way:boolean) => void;  
+  showBooking:boolean;
+  setShowBooking: (showBooking:boolean) => void;
 }
 
-const Search = ({setBookingDetailsOutbound, setBookingDetailsReturn, flightList, setFlightList, requestData, setRequestData}:SearchProps) => {
-
-  const [way, setWay] = useState(true);
+const Search = ({way, setWay, setBookingDetailsOutbound, setBookingDetailsReturn, flightList, setFlightList, requestData, setRequestData, showBooking, setShowBooking}:SearchProps) => {
 
   const wayHandler = () => {
     setWay(!way);
   };
 
   const [isSearched, setIsSearched] = useState(false);
-
-  
 
   const requestDataHandler = (e: any) => {
     const { name, value } = e.target;
@@ -50,7 +49,7 @@ const Search = ({setBookingDetailsOutbound, setBookingDetailsReturn, flightList,
 
   return (
     <>
-      <div className="search rounded shadow-lg">
+      <div className="search rounded shadow-lg" id="search-table">
         <form action="">
           <div className="row">
             <div className="col-md-2 pe-0 col-sm-12">
@@ -160,7 +159,7 @@ const Search = ({setBookingDetailsOutbound, setBookingDetailsReturn, flightList,
                   onClick={requestDataHandler.bind(this)}
                 >
                   <option value="" hidden selected>
-                    0
+                    1
                   </option>
                   <option value="1">1</option> <option value="2">2</option>
                   <option value="3">3</option> <option value="4">4</option>
@@ -225,7 +224,7 @@ const Search = ({setBookingDetailsOutbound, setBookingDetailsReturn, flightList,
                 new Date(requestData.departureAt).toDateString()
             )
             .map((itinerary) => (
-              <SearchItemOutbound itinerary={itinerary} flight={flight} way={way} setBookingDetailsOutbound={setBookingDetailsOutbound}/>
+              <SearchItemOutbound itinerary={itinerary} flight={flight} way={way} setBookingDetailsOutbound={setBookingDetailsOutbound} showBooking={showBooking} setShowBooking={setShowBooking}/>
             ))
         )}
 
@@ -252,7 +251,7 @@ const Search = ({setBookingDetailsOutbound, setBookingDetailsReturn, flightList,
                 new Date(requestData.returnAt).toDateString()
             )
             .map((itinerary) => (
-              <SearchItemReturn itinerary={itinerary} flight={flight} way={way} setBookingDetailsReturn={setBookingDetailsReturn}/>
+              <SearchItemReturn itinerary={itinerary} flight={flight} way={way} setBookingDetailsReturn={setBookingDetailsReturn} showBooking={showBooking} setShowBooking={setShowBooking}/>
             ))
         )}
     </>

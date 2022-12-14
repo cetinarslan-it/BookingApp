@@ -7,6 +7,8 @@ interface SearchItemProps {
   flight: Flight;
   way: boolean;
   setBookingDetailsReturn: (bookingDetailsReturn: BookingDetails) => void;
+  showBooking: boolean;
+  setShowBooking: (showBooking: boolean) => void;
 }
 
 function SearchItemReturn({
@@ -14,6 +16,8 @@ function SearchItemReturn({
   flight,
   way,
   setBookingDetailsReturn,
+  showBooking,
+  setShowBooking
 }: SearchItemProps) {
   const [showReturn, setShowReturn] = useState(false);
 
@@ -23,6 +27,7 @@ function SearchItemReturn({
 
   const handleBook = () => {
     setShowReturn(!showReturn);
+    setShowBooking(true);
     setBookingDetailsReturn({
       departure: flight.departure,
       arrival: flight.arrival,
@@ -42,7 +47,7 @@ function SearchItemReturn({
   };
 
   return (
-    <div className="Card-Flight">
+    <div className="card-flight">
       <div className="containerItem rounded shadow-lg">
         <div className="row">
           <div className="col-md-3">

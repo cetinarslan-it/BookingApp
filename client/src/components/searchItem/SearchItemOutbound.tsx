@@ -7,6 +7,8 @@ interface SearchItemProps {
   flight: Flight;
   way: boolean;
   setBookingDetailsOutbound: (bookingDetailsOutbound: BookingDetails) => void;
+  showBooking: boolean;
+  setShowBooking: (showBooking: boolean) => void;
 }
 
 const SearchItemOutbound = ({
@@ -14,16 +16,19 @@ const SearchItemOutbound = ({
   flight,
   way,
   setBookingDetailsOutbound,
+  showBooking,
+  setShowBooking
 }: SearchItemProps) => {
 
   const [showOutbound, setShowOutbound] = useState(false);
 
   const showOutboundDetails = () => {
-    setShowOutbound(!showOutbound);
+    setShowOutbound(true);
   };
 
   const handleBook = () => {
     setShowOutbound(!showOutbound);
+    setShowBooking(!showBooking);
     setBookingDetailsOutbound({
       departure: flight.departure,
       arrival: flight.arrival,

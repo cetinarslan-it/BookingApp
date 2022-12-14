@@ -53,4 +53,13 @@ declare global {
     adultPrice: number;
     childPrice: number;
   }
+
+  interface PassangerDetails {
+    firstName: string;
+    lastName: string;
+    mobileNumber: string;
+    email : string;
+    gender: string;
+    ageGroup: string;
+  }
 }
