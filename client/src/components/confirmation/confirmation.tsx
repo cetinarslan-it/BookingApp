@@ -25,7 +25,7 @@ const Confirmation = ({
 
   return (
     <div>
-      <hr id="bookingInfo" style={{ marginBottom: "3%" }} />
+      <div id="bookingInfo" style={{ marginBottom: "1%" }} />
       <div className="bookingInfo">
         <div className="search rounded shadow-lg">
           <form>
@@ -130,12 +130,6 @@ const Confirmation = ({
                   </p>
                   <p>
                     <strong>Surname:</strong> {passangerDetails.lastName}
-                  </p>
-                  <p>
-                    <strong>Gender:</strong> {passangerDetails.gender}
-                  </p>
-                  <p>
-                    <strong>Age Group:</strong> {passangerDetails.ageGroup}
                   </p>
                   <p>
                     <strong>Mobile:</strong> {passangerDetails.mobileNumber}
