@@ -120,7 +120,7 @@ const Confirmation = ({
             </div>
 
             <div className="row">
-              <h4 className="passanger-list col-md-6 pe-3 mb-1 col-sm-12">
+              <h4 className="confirmation-passanger-list col-md-6 pe-3 mb-1 col-sm-12">
                 Passanger List
               </h4>
               <hr />

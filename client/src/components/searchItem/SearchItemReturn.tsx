@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./searchItem.css";
 
 interface SearchItemProps {
+  isBooked:boolean;
   itinerary: Itinerary;
   flight: Flight;
   way: boolean;
@@ -12,6 +13,7 @@ interface SearchItemProps {
 }
 
 function SearchItemReturn({
+  isBooked,
   itinerary,
   flight,
   way,
@@ -173,7 +175,7 @@ function SearchItemReturn({
             }}
           >
             <a
-              href="#passangerRegistry"
+              href={ isBooked ? "#passangerRegistry" : "#outboundPart"}
               style={{ textDecoration: "none", color: "white" }}
             >
               <div

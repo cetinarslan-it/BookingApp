@@ -1,14 +1,18 @@
+import { timeStamp } from "console";
+import { request } from "http";
 import React from "react";
 import "./passangerRegistry.css";
 
 interface PassangerProps {
   passangerDetails: PassangerDetails;
   setPassangerDetails: (passangerDetails: PassangerDetails) => void;
+  requestData: SearchDetails;
 }
 
 const PassangerRegistry = ({
   passangerDetails,
   setPassangerDetails,
+  requestData,
 }: PassangerProps) => {
   const passangerDataHandler = (e: any) => {
     const { name, value } = e.target;
@@ -16,13 +20,17 @@ const PassangerRegistry = ({
     setPassangerDetails(passangerDetailsRef);
   };
 
+  const num = requestData.childCount + requestData.adultCount;
   return (
     <div>
-      <hr id="passangerRegistry" style={{ marginBottom: "10%"}} />
+      <hr id="passangerRegistry" style={{ marginBottom: "10%" }} />
       <div className="passangerRegistry">
-        <div className="search rounded shadow-lg">
+        <div className="passanger-list rounded shadow-lg">
+          <h2>Passanger List</h2>
+        </div>
+        <div className="passanger rounded shadow-lg">
           <form>
-            <h2>Passanger Info</h2>
+            <h2>Passanger -1</h2>
             <hr className="me-2" />
             <div className="row">
               <div className="col-md-4 pe-3 mb-1 col-sm-12">
@@ -36,7 +44,7 @@ const PassangerRegistry = ({
                   placeholder="e.g. Cetin"
                   name="firstName"
                   onChange={passangerDataHandler.bind(this)}
-                />             
+                />
               </div>
               <div className="col-md-4 pe-3 mb-1 col-sm-12">
                 <label htmlFor="lastName" className="form-label">
@@ -49,7 +57,7 @@ const PassangerRegistry = ({
                   placeholder="e.g. Arslan"
                   name="lastName"
                   onChange={passangerDataHandler.bind(this)}
-                />                
+                />
               </div>
               <div className="col-md-4 pe-3 mb-1 col-sm-12">
                 <label htmlFor="mobileNumber" className="form-label">
@@ -75,7 +83,7 @@ const PassangerRegistry = ({
                   placeholder="e.g. cetin@gmail.com"
                   name="email"
                   onChange={passangerDataHandler.bind(this)}
-                />               
+                />
               </div>
               <div className="col-md-4 pe-3 mb-1 col-sm-12">
                 <label htmlFor="gender" className="form-label">

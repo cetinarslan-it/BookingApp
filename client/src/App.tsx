@@ -74,6 +74,7 @@ const App = () => {
       {showBooking&&<PassangerRegistry
         setPassangerDetails={setPassangerDetails}
         passangerDetails={passangerDetails}
+        requestData={requestData}
       />}
       {showBooking&&<Confirmation
         bookingDetailsOutbound={bookingDetailsOutbound}

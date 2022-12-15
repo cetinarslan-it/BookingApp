@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "./searchItem.css";
 
 interface SearchItemProps {
+  isBooked: boolean;
+  setIsBooked: (isBooked:boolean)=> void;
   itinerary: Itinerary;
   flight: Flight;
   way: boolean;
@@ -12,6 +14,8 @@ interface SearchItemProps {
 }
 
 const SearchItemOutbound = ({
+  isBooked,
+  setIsBooked,
   itinerary,
   flight,
   way,
@@ -26,6 +30,7 @@ const SearchItemOutbound = ({
   };
 
   const handleBook = () => {
+    setIsBooked(true);
     setShowOutbound(!showOutbound);
     setShowBooking(!showBooking);
     setBookingDetailsOutbound({

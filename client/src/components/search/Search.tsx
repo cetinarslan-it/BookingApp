@@ -34,6 +34,7 @@ const Search = ({
   };
 
   const [isSearched, setIsSearched] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
 
   const requestDataHandler = (e: any) => {
     const { name, value } = e.target;
@@ -238,6 +239,8 @@ const Search = ({
                 )
                 .map((itinerary) => (
                   <SearchItemOutbound
+                    isBooked={isBooked}
+                    setIsBooked={setIsBooked}
                     itinerary={itinerary}
                     flight={flight}
                     way={way}
@@ -280,6 +283,7 @@ const Search = ({
             )
             .map((itinerary) => (
               <SearchItemReturn
+                isBooked={isBooked}
                 itinerary={itinerary}
                 flight={flight}
                 way={way}

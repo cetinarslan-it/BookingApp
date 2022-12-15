@@ -8,3 +8,17 @@
    padding: 5px 5px;
    max-width: 1000px
  }
+
+ .passanger-list{
+   background-color:rgba(243, 241, 241, 0.4);
+   margin: 8% auto 2px;
+   padding: 5px 10px;
+   max-width: 1000px
+ }
+
+ .passanger{
+   background-color:rgba(243, 241, 241, 0.4);
+   margin: 2% auto 2px;
+   padding: 5px 10px;
+   max-width: 1000px
+ }
