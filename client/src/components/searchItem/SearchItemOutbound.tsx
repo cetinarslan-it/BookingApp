@@ -17,9 +17,8 @@ const SearchItemOutbound = ({
   way,
   setBookingDetailsOutbound,
   showBooking,
-  setShowBooking
+  setShowBooking,
 }: SearchItemProps) => {
-
   const [showOutbound, setShowOutbound] = useState(false);
 
   const showOutboundDetails = () => {

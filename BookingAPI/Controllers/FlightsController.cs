@@ -34,7 +34,7 @@ namespace BookingAPI.Controllers
 
             if (flights == null)
             {
-                return NotFound();
+                return NotFound(flights);
             }
 
             return Ok(flights);

@@ -4,22 +4,31 @@ import SearchItemOutbound from "../searchItem/SearchItemOutbound";
 import SearchItemReturn from "../searchItem/SearchItemReturn";
 import "./search.css";
 
-interface SearchProps
-{
-  setBookingDetailsOutbound: (bookingDetailsOutbound:BookingDetails) => void;
-  setBookingDetailsReturn: (bookingDetailsReturn:BookingDetails) => void;
-  flightList:Flight[];
-  setFlightList: (flightList:Flight[]) => void;
-  requestData:SearchDetails;
-  setRequestData: (requestData:SearchDetails) => void;
-  way:boolean;
-  setWay: (way:boolean) => void;  
-  showBooking:boolean;
-  setShowBooking: (showBooking:boolean) => void;
+interface SearchProps {
+  setBookingDetailsOutbound: (bookingDetailsOutbound: BookingDetails) => void;
+  setBookingDetailsReturn: (bookingDetailsReturn: BookingDetails) => void;
+  flightList: Flight[];
+  setFlightList: (flightList: Flight[]) => void;
+  requestData: SearchDetails;
+  setRequestData: (requestData: SearchDetails) => void;
+  way: boolean;
+  setWay: (way: boolean) => void;
+  showBooking: boolean;
+  setShowBooking: (showBooking: boolean) => void;
 }
 
-const Search = ({way, setWay, setBookingDetailsOutbound, setBookingDetailsReturn, flightList, setFlightList, requestData, setRequestData, showBooking, setShowBooking}:SearchProps) => {
-
+const Search = ({
+  way,
+  setWay,
+  setBookingDetailsOutbound,
+  setBookingDetailsReturn,
+  flightList,
+  setFlightList,
+  requestData,
+  setRequestData,
+  showBooking,
+  setShowBooking,
+}: SearchProps) => {
   const wayHandler = () => {
     setWay(!way);
   };
@@ -124,7 +133,7 @@ const Search = ({way, setWay, setBookingDetailsOutbound, setBookingDetailsReturn
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">Departure Date</p>
                 <input
-                  className="inputbox textmuted"
+                  className="inputbox"
                   type="date"
                   name="departureAt"
                   onChange={requestDataHandler.bind(this)}
@@ -141,7 +150,7 @@ const Search = ({way, setWay, setBookingDetailsOutbound, setBookingDetailsReturn
               <div className="form-control d-flex flex-column">
                 <p className="h-blue">Return Date</p>
                 <input
-                  className="inputbox textmuted"
+                  className="inputbox"
                   type="date"
                   name="returnAt"
                   onChange={requestDataHandler.bind(this)}
@@ -201,32 +210,45 @@ const Search = ({way, setWay, setBookingDetailsOutbound, setBookingDetailsReturn
 
       {/*/ OutBound */}
       {isSearched && (
-        <div id="outboundPart" className="search outbound rounded shadow-lg" >
+        <div id="outboundPart" className="search outbound rounded shadow-lg">
           <div className="col-md-12">
             <div className="form-control d-flex flex-row">
               <p className="h-blue-title">Outbound :</p>
               <br />
               <p className="h-blue-text">
-                {requestData.departureAt.toString()}{" "}
+                {requestData.departureAt.toString()}
+                {" / "}
               </p>
+              <p className="h-blue-text">
+                {requestData.departure.toString()}
+                {" - "}
+              </p>
+              <p className="h-blue-text">{requestData.arrival.toString()} </p>
             </div>
           </div>
+
+          {flightList
+            .filter((f) => f.departure === requestData.departure)
+            .map((flight) =>
+              flight.itineraries
+                .filter(
+                  (i) =>
+                    new Date(i.departureAt).toDateString() ===
+                    new Date(requestData.departureAt).toDateString()
+                )
+                .map((itinerary) => (
+                  <SearchItemOutbound
+                    itinerary={itinerary}
+                    flight={flight}
+                    way={way}
+                    setBookingDetailsOutbound={setBookingDetailsOutbound}
+                    showBooking={showBooking}
+                    setShowBooking={setShowBooking}
+                  />
+                ))
+            )}
         </div>
       )}
-
-      {flightList
-        .filter((f) => f.departure === requestData.departure)
-        .map((flight) =>
-          flight.itineraries
-            .filter(
-              (i) =>
-                new Date(i.departureAt).toDateString() ===
-                new Date(requestData.departureAt).toDateString()
-            )
-            .map((itinerary) => (
-              <SearchItemOutbound itinerary={itinerary} flight={flight} way={way} setBookingDetailsOutbound={setBookingDetailsOutbound} showBooking={showBooking} setShowBooking={setShowBooking}/>
-            ))
-        )}
 
       {/*/ Return */}
       {isSearched && way && (
@@ -235,13 +257,19 @@ const Search = ({way, setWay, setBookingDetailsOutbound, setBookingDetailsReturn
             <div className="form-control d-flex flex-row">
               <p className="h-blue-title">Return :</p>
               <br />
-              <p className="h-blue-text">{requestData.returnAt.toString()}</p>
+              <p className="h-blue-text">
+                {requestData.returnAt.toString()}
+                {" / "}
+              </p>
+              <p className="h-blue-text">
+                {requestData.arrival.toString()}
+                {" - "}
+              </p>
+              <p className="h-blue-text">{requestData.departure.toString()} </p>
             </div>
           </div>
-        </div>
-      )}
 
-      {flightList
+          {flightList
         .filter((f) => f.departure === requestData.arrival)
         .map((flight) =>
           flight.itineraries
@@ -251,9 +279,24 @@ const Search = ({way, setWay, setBookingDetailsOutbound, setBookingDetailsReturn
                 new Date(requestData.returnAt).toDateString()
             )
             .map((itinerary) => (
-              <SearchItemReturn itinerary={itinerary} flight={flight} way={way} setBookingDetailsReturn={setBookingDetailsReturn} showBooking={showBooking} setShowBooking={setShowBooking}/>
+              <SearchItemReturn
+                itinerary={itinerary}
+                flight={flight}
+                way={way}
+                setBookingDetailsReturn={setBookingDetailsReturn}
+                showBooking={showBooking}
+                setShowBooking={setShowBooking}
+              />
             ))
         )}
+
+
+
+
+        </div>
+      )}
+
+     
     </>
   );
 };

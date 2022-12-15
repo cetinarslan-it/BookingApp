@@ -9,7 +9,7 @@
 }
 
 .passanger-list {
-  margin-top: 0.5rem;
+  margin: 0.5rem;
 }
 
 .total-price {
@@ -20,7 +20,7 @@
 }
 
 .bookingInfo{
-  margin-top:10%;
+  margin-top:2%;
   margin-bottom:1%;
 }
 

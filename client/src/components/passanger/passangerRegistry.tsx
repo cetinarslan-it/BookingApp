@@ -18,7 +18,7 @@ const PassangerRegistry = ({
 
   return (
     <div>
-      <hr id="passangerRegistry" style={{ marginBottom: "10%" }} />
+      <hr id="passangerRegistry" style={{ marginBottom: "10%"}} />
       <div className="passangerRegistry">
         <div className="search rounded shadow-lg">
           <form>
@@ -88,8 +88,8 @@ const PassangerRegistry = ({
                   onChange={passangerDataHandler.bind(this)}
                 >
                   <option value="" hidden selected></option>
-                  <option value="Stockholm">Male</option>
-                  <option value="Oslo">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
               <div className="col-md-4 pe-3 mb-1 col-sm-12">
@@ -103,8 +103,8 @@ const PassangerRegistry = ({
                   onChange={passangerDataHandler.bind(this)}
                 >
                   <option value="" hidden selected></option>
-                  <option value="Stockholm">Child</option>
-                  <option value="Oslo">Adult</option>
+                  <option value="Child">Child</option>
+                  <option value="Adult">Adult</option>
                 </select>
               </div>
               <div>

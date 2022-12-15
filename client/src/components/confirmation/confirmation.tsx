@@ -77,6 +77,7 @@ const Confirmation = ({
                 <div className="col-md-6 pe-3 mb-1 col-sm-12">
                   <h4>Return</h4>
                   <hr />
+                  <div>
                   <div className="return">
                     <p>
                       <strong>Flight:</strong> {bookingDetailsReturn.departure}{" "}
@@ -112,6 +113,7 @@ const Confirmation = ({
                         requestData.childCount *
                           bookingDetailsOutbound.childPrice}
                     </p>
+                    </div>
                   </div>
                 </div>
               )}
@@ -136,6 +138,12 @@ const Confirmation = ({
                   </p>
                   <p>
                     <strong>Email:</strong> {passangerDetails.email}
+                  </p>
+                  <p>
+                    <strong>Gendre:</strong> {passangerDetails.gender}
+                  </p>
+                  <p>
+                    <strong>Age Group:</strong> {passangerDetails.ageGroup}
                   </p>
                 </div>
               </div>

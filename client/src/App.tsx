@@ -63,9 +63,9 @@ const App = () => {
         way={way}
         setWay={setWay}
         setBookingDetailsOutbound={setBookingDetailsOutbound}
-        setBookingDetailsReturn={setBookingDetailsReturn}
-        setFlightList={setFlightList}
+        setBookingDetailsReturn={setBookingDetailsReturn}      
         flightList={flightList}
+        setFlightList={setFlightList}
         requestData={requestData}
         setRequestData={setRequestData}
         showBooking={showBooking}
