@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./confirmation.css";
 import Swal from "sweetalert2";
-import axios from "axios";
 import moment from "moment";
 
 interface ConfirmationProps {
@@ -9,20 +8,17 @@ interface ConfirmationProps {
   bookingDetailsReturn: BookingDetails;
   flightList: Flight[];
   requestData: SearchDetails;
-  passangerDetails: PassangerDetails;
+  passangerDetailsList: PassangerDetails[];
   way: boolean;
 }
 
 const Confirmation = ({
   bookingDetailsOutbound,
   bookingDetailsReturn,
-  flightList,
   requestData,
-  passangerDetails,
+  passangerDetailsList,
   way,
 }: ConfirmationProps) => {
-  const [passangerList, setPassangerList] = useState<Passanger[]>([]);
-
   return (
     <div>
       <div id="bookingInfo" style={{ marginBottom: "1%" }} />
@@ -78,41 +74,44 @@ const Confirmation = ({
                   <h4>Return</h4>
                   <hr />
                   <div>
-                  <div className="return">
-                    <p>
-                      <strong>Flight:</strong> {bookingDetailsReturn.departure}{" "}
-                      - {bookingDetailsReturn.arrival}
-                    </p>
-                    <p>
-                      <strong>Date:</strong>{" "}
-                      {moment(
-                        bookingDetailsReturn.departureAt.toString()
-                      ).format("LLL")}
-                    </p>
-                    <p>
-                      <strong>Duration:</strong>{" "}
-                      {moment
-                        .duration(
-                          moment(
-                            bookingDetailsReturn.arrivalAt.toString()
-                          ).diff(
-                            moment(bookingDetailsReturn.departureAt.toString())
+                    <div className="return">
+                      <p>
+                        <strong>Flight:</strong>{" "}
+                        {bookingDetailsReturn.departure} -{" "}
+                        {bookingDetailsReturn.arrival}
+                      </p>
+                      <p>
+                        <strong>Date:</strong>{" "}
+                        {moment(
+                          bookingDetailsReturn.departureAt.toString()
+                        ).format("LLL")}
+                      </p>
+                      <p>
+                        <strong>Duration:</strong>{" "}
+                        {moment
+                          .duration(
+                            moment(
+                              bookingDetailsReturn.arrivalAt.toString()
+                            ).diff(
+                              moment(
+                                bookingDetailsReturn.departureAt.toString()
+                              )
+                            )
                           )
-                        )
-                        .asHours()}
-                      <i> hour(s)</i>
-                    </p>
-                    <p>
-                      <strong>Seats:</strong> {requestData.adultCount} adult(s)
-                      + {requestData.childCount} child/children
-                    </p>
-                    <p>
-                      <strong>Price:</strong> SEK{" "}
-                      {requestData.adultCount *
-                        bookingDetailsOutbound.adultPrice +
-                        requestData.childCount *
-                          bookingDetailsOutbound.childPrice}
-                    </p>
+                          .asHours()}
+                        <i> hour(s)</i>
+                      </p>
+                      <p>
+                        <strong>Seats:</strong> {requestData.adultCount}{" "}
+                        adult(s) + {requestData.childCount} child/children
+                      </p>
+                      <p>
+                        <strong>Price:</strong> SEK{" "}
+                        {requestData.adultCount *
+                          bookingDetailsOutbound.adultPrice +
+                          requestData.childCount *
+                            bookingDetailsOutbound.childPrice}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -125,28 +124,35 @@ const Confirmation = ({
               </h4>
               <hr />
 
-              <div className="col-md-6 pe-3 mb-1 col-sm-12">
-                <div className="return">
-                  <p>
-                    <strong>Name:</strong> {passangerDetails.firstName}
-                  </p>
-                  <p>
-                    <strong>Surname:</strong> {passangerDetails.lastName}
-                  </p>
-                  <p>
-                    <strong>Mobile:</strong> {passangerDetails.mobileNumber}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {passangerDetails.email}
-                  </p>
-                  <p>
-                    <strong>Gendre:</strong> {passangerDetails.gender}
-                  </p>
-                  <p>
-                    <strong>Age Group:</strong> {passangerDetails.ageGroup}
-                  </p>
+              { passangerDetailsList.map((passangerDetails, index) =>
+
+                <div className="col-md-6 pe-3 mb-1 col-sm-12">
+                  <div className="return">
+                    <p>
+                      <strong>Passanger - {index+1}</strong>
+                    </p>
+                    <p>
+                      <strong>Name:</strong> {passangerDetailsList[index].firstName}
+                    </p>
+                    <p>
+                      <strong>Surname:</strong> {passangerDetailsList[index].lastName}
+                    </p>
+                    <p>
+                      <strong>Mobile:</strong>{" "} {passangerDetailsList[index].mobileNumber}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {passangerDetailsList[index].email}
+                    </p>
+                    <p>
+                      <strong>Gendre:</strong> {passangerDetailsList[index].gender}
+                    </p>
+                    <p>
+                      <strong>Age Group:</strong>{" "}
+                      {passangerDetailsList[index].ageGroup}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div>
                 <p className="total-price">
@@ -168,12 +174,12 @@ const Confirmation = ({
                 <div
                   className="btn btn-secondary form-control text-center"
                   onClick={() => {
-                    passangerDetails.firstName === "" ||
-                    passangerDetails.lastName === "" ||
-                    passangerDetails.gender === "" ||
-                    passangerDetails.ageGroup === "" ||
-                    passangerDetails.email === "" ||
-                    passangerDetails.mobileNumber === ""
+                    passangerDetailsList.some(f=>f.firstName === "" ) ||
+                    passangerDetailsList.some(l=>l.lastName === "" ) ||
+                    passangerDetailsList.some(g=>g.gender === "" ) ||
+                    passangerDetailsList.some(a=>a.ageGroup === "" ) ||
+                    passangerDetailsList.some(e=>e.email === "" ) ||
+                    passangerDetailsList.some(m=>m.mobileNumber === "" )
                       ? Swal.fire({
                           icon: "warning",
                           title: "Please fill in all the required information!",
@@ -192,13 +198,7 @@ const Confirmation = ({
                   Confirm Booking
                 </div>
               </div>
-
-
-
-              
             </div>
-
-
           </form>
         </div>
       </div>

@@ -47,14 +47,8 @@ const App = () => {
     childCount: 0,
   });
 
-  const [passangerDetails, setPassangerDetails] = useState<PassangerDetails>({
-    firstName: "",
-    lastName: "",
-    mobileNumber: "",
-    email: "",
-    gender: "",
-    ageGroup: "",
-  });
+  const [passangerDetailsList, setPassangerDetailsList] = useState<PassangerDetails[]>([]);
+
 
   return (
     <div>
@@ -70,18 +64,24 @@ const App = () => {
         setRequestData={setRequestData}
         showBooking={showBooking}
         setShowBooking={setShowBooking}
+        passangerDetailsList={passangerDetailsList}
+        setPassangerDetailsList={setPassangerDetailsList}
       />
       {showBooking&&<PassangerRegistry
-        setPassangerDetails={setPassangerDetails}
-        passangerDetails={passangerDetails}
         requestData={requestData}
+        flightList={flightList}
+        way={way}
+        passangerDetailsList={passangerDetailsList}
+        setPassangerDetailsList={setPassangerDetailsList}
+      
+
       />}
       {showBooking&&<Confirmation
         bookingDetailsOutbound={bookingDetailsOutbound}
         bookingDetailsReturn={bookingDetailsReturn}
         flightList={flightList}
         requestData={requestData}
-        passangerDetails={passangerDetails}
+        passangerDetailsList={passangerDetailsList}
         way={way}
       />}
       <Footer />

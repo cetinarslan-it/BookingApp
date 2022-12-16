@@ -15,6 +15,8 @@ interface SearchProps {
   setWay: (way: boolean) => void;
   showBooking: boolean;
   setShowBooking: (showBooking: boolean) => void;
+  passangerDetailsList:PassangerDetails[];
+  setPassangerDetailsList: (passangerDetailsList:PassangerDetails[])=> void;
 }
 
 const Search = ({
@@ -28,6 +30,8 @@ const Search = ({
   setRequestData,
   showBooking,
   setShowBooking,
+  passangerDetailsList,
+  setPassangerDetailsList
 }: SearchProps) => {
   const wayHandler = () => {
     setWay(!way);
@@ -43,6 +47,18 @@ const Search = ({
   };
 
   const searchHandler = () => {
+
+  setPassangerDetailsList(Array(requestData.adultCount*1 + requestData.childCount*1).fill({
+
+    firstName: "",
+    lastName: "",
+    mobileNumber: "",
+    email : "",
+    gender: "",
+    ageGroup: "",
+
+  }));
+
     setIsSearched(true);
     const getSearchedFlightList = () => {
       axios
@@ -72,7 +88,7 @@ const Search = ({
                     checked={way}
                     onClick={wayHandler}
                   />
-                  Roundtrip
+                  Roundtrip  {requestData.adultCount*1 + requestData.childCount*1}
                   <span></span>
                 </label>
               </div>

@@ -12,7 +12,7 @@ using BookingAPI.Model;
         public DbSet<BookingAPI.Model.Flight> Flights { get; set; }
         public DbSet<BookingAPI.Model.Itinerary> Itineraries { get; set; } 
         public DbSet<BookingAPI.Model.Price> Prices { get; set; }
-         public DbSet<BookingAPI.Model.Passanger> Passangers { get; set; }
+        public DbSet<BookingAPI.Model.Passanger> Passangers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
